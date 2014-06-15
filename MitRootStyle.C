@@ -13,6 +13,7 @@
 #include <TPad.h>
 #include <TH1.h>
 #include <TStyle.h>
+#include <TText.h>
 
 class MitRootStyle
 {
@@ -28,6 +29,8 @@ public:
                                EColor color = kBlack);
   static void     SetStyleWide();
   static void     SetStyle    ();
+  static void     OverlayFrame(Double_t xMax=1.0, Double_t yMax=1.0);
+  static void     AddText     (TString text, Double_t x=0.01, Double_t y=0.01);
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -200,6 +203,34 @@ inline void MitRootStyle::SetStyle()
   MitRootStyle->SetTitleFont  (42,"Y");
 
   MitRootStyle->SetOptStat    (0);
+
+  return;
+}
+
+//--------------------------------------------------------------------------------------------------
+inline void MitRootStyle::OverlayFrame(Double_t xMax, Double_t yMax)
+{
+  // Overlay a linear frame from user coordinates (0->xMax, 0->yMax) and put the frame text
+
+  // create new transparent pad for the text
+  TPad *transPad = new TPad("transPad","Transparent Pad",0,0,xMax,yMax);
+  transPad->SetFillStyle(4000);
+  transPad->Draw();
+  transPad->cd();
+
+  return;
+}
+
+//--------------------------------------------------------------------------------------------------
+inline void MitRootStyle::AddText(TString text, Double_t x, Double_t y)
+{
+  // Add text with unified styles
+
+  // overlay the text in a well defined frame
+  TText *plotText = new TText(x,y,text.Data());
+  plotText->SetTextSize(0.02);
+  plotText->SetTextColor(kBlue);
+  plotText->Draw();
 
   return;
 }

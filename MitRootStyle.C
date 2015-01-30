@@ -21,7 +21,7 @@ public:
   MitRootStyle() { Init(); }
   
   static void     Init();
-  static TCanvas* MakeCanvas  (const char* name, const char *title);
+  static TCanvas *MakeCanvas  (const char* name, const char *title);
   static void     InitSubPad  (TPad *pad, int i);
   static void     InitHistWide(TH1 *h, const char *xtit, const char *ytit  = "Number of Entries",
                                EColor color = kBlack);
@@ -30,7 +30,7 @@ public:
   static void     SetStyleWide();
   static void     SetStyle    ();
   static void     OverlayFrame(Double_t xMax=1.0, Double_t yMax=1.0);
-  static void     AddText     (TString text, Double_t x=0.01, Double_t y=0.01);
+  static TText   *AddText     (TString text, Double_t x=0.01, Double_t y=0.01);
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ inline void MitRootStyle::Init()
   // Initialization with proper defaults is the start
 
   const char* author   = "$Author: paus $$";
-  const char* modified = "$Modified: Wed Mar 19 00:19:30 2014 by paus $$";
+  const char* modified = "$Modified: Thu Jan 29 21:57:08 2015 by paus $$";
   printf(" MIT root style (%s,%s).\n",author,modified);
   printf("\n");
   printf(" Use: MitRootStyle::MakeCanvas(name,title)\n");
@@ -222,7 +222,7 @@ inline void MitRootStyle::OverlayFrame(Double_t xMax, Double_t yMax)
 }
 
 //--------------------------------------------------------------------------------------------------
-inline void MitRootStyle::AddText(TString text, Double_t x, Double_t y)
+inline TText *MitRootStyle::AddText(TString text, Double_t x, Double_t y)
 {
   // Add text with unified styles
 
@@ -232,6 +232,6 @@ inline void MitRootStyle::AddText(TString text, Double_t x, Double_t y)
   plotText->SetTextColor(kBlue);
   plotText->Draw();
 
-  return;
+  return plotText;
 }
 #endif

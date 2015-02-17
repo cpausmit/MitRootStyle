@@ -20,7 +20,7 @@ class MitRootStyle
 public:
   MitRootStyle() { Init(); }
   
-  static void     Init();
+  static void     Init(int debug=0);
   static TCanvas *MakeCanvas  (const char* name, const char *title);
   static void     InitSubPad  (TPad *pad, int i);
   static void     InitHistWide(TH1 *h, const char *xtit, const char *ytit  = "Number of Entries",
@@ -34,18 +34,20 @@ public:
 };
 
 //--------------------------------------------------------------------------------------------------
-inline void MitRootStyle::Init()
+inline void MitRootStyle::Init(int debug)
 {
   // Initialization with proper defaults is the start
 
-  const char* author   = "$Author: paus $$";
-  const char* modified = "$Modified: Thu Jan 29 21:57:08 2015 by paus $$";
-  printf(" MIT root style (%s,%s).\n",author,modified);
-  printf("\n");
-  printf(" Use: MitRootStyle::MakeCanvas(name,title)\n");
-  printf("      MitRootStyle::InitSubPad(pad,nPad)\n");
-  printf("      MitRootStyle::InitHist(hist,xTitle,yTitle,color)\n");
-  printf("\n");
+  if (debug>-1) {
+    const char* author   = "$Author: paus $$";
+    const char* modified = "$Modified: Mon Feb  2 14:18:06 2015 by paus $$";
+    printf(" MIT root style (%s,%s).\n",author,modified);
+    printf("\n");
+    printf(" Use: MitRootStyle::MakeCanvas(name,title)\n");
+    printf("      MitRootStyle::InitSubPad(pad,nPad)\n");
+    printf("      MitRootStyle::InitHist(hist,xTitle,yTitle,color)\n");
+    printf("\n");
+  }
   SetStyle();
 }
 

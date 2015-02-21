@@ -12,14 +12,17 @@ then
   exit 0
 fi 
 
-# compile the package
-root -l -q MitRootStyle.C+
-
 # generate the setup file
 rm -f setup.sh
 touch setup.sh
 echo "# CAREFUL THIS FILE IS GENERATED AT INSTALL" >> setup.sh
 echo "export MIT_ROOT_STYLE="`pwd`                 >> setup.sh
 echo ""                                            >> setup.sh
+
+# initialize
+source ./setup.sh
+
+# compile the package
+root -l -q MitRootStyle.C+
 
 exit 0

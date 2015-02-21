@@ -11,6 +11,7 @@
 
 #include <TCanvas.h>
 #include <TPad.h>
+#include <TVirtualPad.h>
 #include <TH1.h>
 #include <TStyle.h>
 #include <TText.h>
@@ -23,6 +24,7 @@ public:
   static void     Init(int debug=0);
   static TCanvas *MakeCanvas  (const char* name, const char *title);
   static void     InitSubPad  (TPad *pad, int i);
+  static void     InitSubPad  (TVirtualPad *pad);
   static void     InitHistWide(TH1 *h, const char *xtit, const char *ytit  = "Number of Entries",
                                EColor color = kBlack);
   static void     InitHist    (TH1 *h, const char *xtit, const char *ytit  = "Number of Entries",
@@ -71,6 +73,18 @@ inline void MitRootStyle::InitSubPad(TPad* pad, int i)
   tmpPad->SetTopMargin   (0.05);
   tmpPad->SetRightMargin (0.07);
   tmpPad->SetBottomMargin(0.15);
+
+  return;
+}
+
+inline void MitRootStyle::InitSubPad(TVirtualPad* pad)
+{
+  // Initializing a sub pad
+
+  pad->SetLeftMargin  (0.20);
+  pad->SetTopMargin   (0.05);
+  pad->SetRightMargin (0.07);
+  pad->SetBottomMargin(0.15);
 
   return;
 }

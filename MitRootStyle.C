@@ -13,6 +13,7 @@
 #include <TPad.h>
 #include <TVirtualPad.h>
 #include <TH1.h>
+#include <TGraph.h>
 #include <TStyle.h>
 #include <TText.h>
 
@@ -25,6 +26,8 @@ public:
   static TCanvas *MakeCanvas  (const char* name, const char *title);
   static void     InitSubPad  (TPad *pad, int i);
   static void     InitSubPad  (TVirtualPad *pad);
+  static void     InitGraph   (TGraph *g, const char *xtit, const char *ytit  = "Number of Entries",
+                               EColor color = kBlack);
   static void     InitHistWide(TH1 *h, const char *xtit, const char *ytit  = "Number of Entries",
                                EColor color = kBlack);
   static void     InitHist    (TH1 *h, const char *xtit, const char *ytit  = "Number of Entries",
@@ -89,6 +92,39 @@ inline void MitRootStyle::InitSubPad(TVirtualPad* pad)
   return;
 }
 
+//--------------------------------------------------------------------------------------------------
+inline void MitRootStyle::InitGraph(TGraph *graph, const char *xtit, const char *ytit, EColor color)
+{
+  // Initializing a histogram
+
+  graph->SetTitle(TString(";")+TString(xtit)+TString(";")+TString(ytit));
+
+  graph->SetLineColor  (color);
+  graph->SetLineWidth  (4.0);
+
+  graph->SetMarkerStyle(20);
+  graph->SetMarkerColor(color);
+  graph->SetMarkerSize (1.4);
+
+  //graph->SetTitleFont  (42   ,"X");
+  //graph->SetTitleSize  (0.055,"X");
+  //graph->SetTitleOffset(1.100,"X");
+  //graph->SetLabelOffset(0.010,"X");
+  //graph->SetLabelSize  (0.050,"X");
+  //graph->SetLabelFont  (42   ,"X");
+  //graph->SetTickLength (-0.01,"X");
+
+  //graph->SetTitleFont  (42   ,"Y");
+  //graph->SetTitleSize  (0.055,"Y");
+  //graph->SetTitleOffset(1.700,"Y");
+  //graph->SetLabelOffset(0.010,"Y");
+  //graph->SetLabelSize  (0.050,"Y");
+  //graph->SetLabelFont  (42   ,"Y");
+  //graph->SetTickLength (-0.01,"Y");
+
+  return;
+}
+
 inline void MitRootStyle::InitHistWide(TH1 *hist, const char *xtit, const char *ytit, EColor color)
 {
   InitHist(hist,xtit,ytit,color);
@@ -149,8 +185,8 @@ inline void MitRootStyle::SetStyle()
   MitRootStyle->SetCanvasColor     (0);
   MitRootStyle->SetCanvasBorderSize(10);
   MitRootStyle->SetCanvasBorderMode(0);
-  MitRootStyle->SetCanvasDefH      (700);
-  MitRootStyle->SetCanvasDefW      (700);
+  MitRootStyle->SetCanvasDefH      (1000);
+  MitRootStyle->SetCanvasDefW      (1000);
   MitRootStyle->SetCanvasDefX      (100);
   MitRootStyle->SetCanvasDefY      (100);
 
@@ -182,7 +218,6 @@ inline void MitRootStyle::SetStyle()
   MitRootStyle->SetHistLineColor(1);
   MitRootStyle->SetHistLineStyle(0);
   MitRootStyle->SetHistLineWidth(2);
-  MitRootStyle->SetNdivisions(505);
 
   // Functions
   MitRootStyle->SetFuncColor(1);
